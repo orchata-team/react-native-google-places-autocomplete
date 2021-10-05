@@ -8,6 +8,9 @@
 
 Version 2 of this library is now available. See more in the [releases](https://github.com/FaridSafi/react-native-google-places-autocomplete/releases/tag/v2.0.0) section.
 
+# :warning: Maintainers Wanted ![Maintainers Wanted](https://img.shields.io/badge/Maintainers-Wanted-green)
+We are in need of more people or companies willing to help. If you have enough time and knowledge, and want to become a maintainer, please open a new issue.
+
 ## Preview
 
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-google-places-autocomplete/master/Assets/screenshot.png)
@@ -404,11 +407,13 @@ export default GooglePlacesInput;
 
 Web support can be enabled via the `requestUrl` prop, by passing in a URL that you can use to proxy your requests. CORS implemented by the Google Places API prevent using this library directly on the web. You will need to use a proxy server. Please be mindful of this limitation when opening an issue.
 
-The `requestUrl` prop takes an object with two properties: `useOnPlatform` and `url`.
+The `requestUrl` prop takes an object with two required properties: `useOnPlatform` and `url`, and an optional `headers` property.
 
 The `url` property is used to set the url that requests will be made to. If you are using the regular google maps API, you need to make sure you are ultimately hitting https://maps.googleapis.com/maps/api.
 
 `useOnPlatform` configures when the proxy url is used. It can be set to either `web`- will be used only when the device platform is detected as web (but not iOS or Android, or `all` - will always be used.
+
+You can optionally specify headers to apply to your request in the `headers` object.
 
 ### Example:
 
@@ -432,6 +437,9 @@ const GooglePlacesInput = () => {
         useOnPlatform: 'web', // or "all"
         url:
           'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api', // or any proxy server that hits https://maps.googleapis.com/maps/api
+        headers: {
+          Authorization: `an auth token`, // if required for your proxy
+        },
       }}
     />
   );
